@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flipkart Clone - Responsive</title>
+    <style>
+        /* General Body Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background-color: #f1f2f6;
+            overflow-x: hidden; /* Prevents horizontal scroll */
+        }
+
+        /* Helper class for active state on popups */
+        .active {
+            opacity: 1 !important;
+            pointer-events: auto !important;
+            transform: translate(0, 0) !important;
+        }
+
+        /* --- Header (#up) --- */
+        #up {
+            width: 100%;
+            background-color: #2874f0;
+            color: white;
+            padding: 10px 5%;
+            box-sizing: border-box;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+        }
+
+        #flipkart {
+            font-size: 24px;
+            font-weight: bold;
+            font-style: italic;
+            color: white;
+        }
+
+        #search {
+            flex-grow: 1;
+            height: 36px;
+            border-radius: 5px;
+            border: none;
+            padding: 0 15px 0 40px; /* Padding for icon */
+            min-width: 200px;
+            font-size: 14px;
+        }
+        
+        .search-container {
+            position: relative;
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+        }
+
+        #searchicon {
+            position: absolute;
+            left: 15px;
+            color: #2874f0;
+            width: 16px;
+            height: 16px;
+        }
+
+        .header-nav {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 16px;
+        }
+        
+        .nav-item svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        #power {
+            font-size: 20px;
+            transform: rotate(180deg);
+        }
+
+        /* --- Categories Section (#second) --- */
+        #second {
+            width: 100%;
+            padding: 20px 10px;
+            margin-top: 10px;
+            background-color: white;
+            box-sizing: border-box;
+            display: flex;
+            justify-content: space-around;
+            align-items: flex-start;
+            overflow-x: auto;
+            gap: 15px;
+        }
+        
+        .category-item {
+            text-align: center;
+            flex-shrink: 0; /* Prevents items from shrinking */
+            width: 80px;
+        }
+
+        .category-item .logo {
+            width: 64px;
+            height: 64px;
+            object-fit: contain;
+        }
+
+        .category-item .box {
+            margin-top: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        /* Hiding the original text container as we combined it */
+        #lekha {
+            display: none;
+        }
+
+
+        /* --- Image Slider (#middle1) --- */
+        #middle1 {
+            width: calc(100% - 20px);
+            max-width: 1400px;
+            margin: 20px auto;
+            overflow: hidden;
+            position: relative;
+            aspect-ratio: 16 / 5; /* Responsive height */
+            border-radius: 8px;
+        }
+
+        #sbox {
+            display: flex;
+            width: 400%; /* 4 images */
+            height: 100%;
+            animation: move 20s ease-in-out infinite;
+        }
+
+        .ps {
+            width: 25%; /* Each slide takes 25% of the sbox width */
+            height: 100%;
+            object-fit: cover;
+        }
+
+        @keyframes move {
+            0%, 20% { transform: translateX(0%); }
+            25%, 45% { transform: translateX(-25%); }
+            50%, 70% { transform: translateX(-50%); }
+            75%, 95% { transform: translateX(-75%); }
+            100% { transform: translateX(0%); }
+        }
+
+        .bar {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+            font-size: 24px;
+            cursor: pointer;
+            border: 1px solid #ddd;
+        }
+        #bar1 { left: 10px; }
+        #bar2 { right: 10px; }
+
+
+        /* --- Electronics Section (#middle2) --- */
+        #middle2 {
+            width: calc(100% - 20px);
+            max-width: 1400px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-sizing: border-box;
+            position: relative;
+        }
+        
+        #heading {
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .electronics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 20px;
+        }
+
+        .product-item {
+            text-align: center;
+            border: 1px solid #eee;
+            padding: 10px;
+            border-radius: 5px;
+            transition: box-shadow 0.2s;
+        }
+        .product-item:hover {
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .product-item .ep {
+            width: 100%;
+            height: 100px;
+            object-fit: contain;
+        }
+        .product-item .line {
+            margin-top: 10px;
+            font-size: 14px;
+            font-weight: 500;
+            color: #333;
+        }
+        #lekha2 { display: none; } /* Hiding original text container */
+
+        /* --- Flight Ticket Ad --- */
+        #fticket {
+            display: block;
+            max-width: 200px; /* Example size */
+            margin: 20px auto;
+        }
+        
+        /* --- Popups & Modals --- */
+        #container, #option, #modal {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 280px;
+            height: 100%;
+            background-color: white;
+            z-index: 100;
+            box-shadow: -4px 0 15px rgba(0,0,0,0.15);
+            opacity: 0;
+            pointer-events: none;
+            transition: transform 0.3s ease-in-out;
+            transform: translateX(100%);
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        
+        #container { background-color: #f1f2f6; }
+        #option { background-color: white; }
+        #modal {
+            top: 50%;
+            left: 50%;
+            width: 90%;
+            max-width: 400px;
+            height: auto;
+            border-radius: 8px;
+            transform: translate(-50%, -50%) scale(0.9);
+            transition: opacity 0.3s, transform 0.3s;
+        }
+        #modal.active {
+             transform: translate(-50%, -50%) scale(1) !important;
+        }
+        
+        #login2, #signup {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            border: 1px solid #dbdbdb;
+            cursor: pointer;
+            margin-bottom: 10px;
+        }
+        #login2 { background-color: #fb641b; color: white; border: none; }
+        #signup { background-color: white; color: #2874f0; }
+        
+        #container .f, #option .option {
+            font-size: 16px;
+            padding: 15px 10px;
+            cursor: pointer;
+            display: block;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        #container .f:hover, #option .option:hover {
+            background-color: #f5f5f5;
+        }
+
+        #remove, #remove2, #of {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            cursor: pointer;
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+            border: none;
+            background: none;
+        }
+        
+        #modal .modal {
+            padding: 15px;
+            text-align: center;
+            font-size: 16px;
+            border-bottom: 1px solid #eee;
+        }
+        #of { top: 10px; right: 15px; text-decoration: none; }
+
+        /* Media Queries for Responsiveness */
+        @media (max-width: 768px) {
+            #up {
+                justify-content: center;
+            }
+            .search-container {
+                width: 100%;
+                order: 3; /* Move search bar to the bottom in flex container */
+            }
+            .header-nav {
+                width: 100%;
+                justify-content: space-around;
+            }
+            #seller, #power, #login {
+                font-size: 14px;
+            }
+            .nav-item span {
+                display: none; /* Hide text on mobile */
+            }
+             #login span {
+                display: inline;
+            }
+            #middle1 { aspect-ratio: 16 / 9; }
+        }
+
+    </style>
+</head>
+<body>
+    <!-- HEADER -->
+    <div id="up">
+        <div id="flipkart">Flipkart</div>
+        <div class="search-container">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" id="searchicon">
+                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
+            </svg>
+            <input type="text" placeholder="Search for products, brands and more" id="search">
+        </div>
+        <div class="header-nav">
+            <div class="nav-item" id="login-container">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                    <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/><path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
+                </svg>
+                <div id="login">Login</div>
+                <div id="power">^</div>
+            </div>
+            <div class="nav-item">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-cart4" viewBox="0 0 16 16" id="cardicon"><path d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5M3.14 5l.5 2H5V5zM6 5v2h2V5zm3 0v2h2V5zm3 0v2h1.36l.5-2zm1.11 3H12v2h.61zM11 8H9v2h2zM8 8H6v2h2zM5 8H3.89l.5 2H5zm0 5a1 1 0 1 0 0 2 1 1 0 0 0 0-2m-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0m9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2m-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0"/></svg>
+                <div id="card">Cart</div>
+            </div>
+            <div class="nav-item">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-shop" viewBox="0 0 16 16" id="shopicon"><path d="M2.97 1.35A1 1 0 0 1 3.73 1h8.54a1 1 0 0 1 .76.35l2.609 3.044A1.5 1.5 0 0 1 16 5.37v.255a2.375 2.375 0 0 1-4.25 1.458A2.37 2.37 0 0 1 9.875 8 2.37 2.37 0 0 1 8 7.083 2.37 2.37 0 0 1 6.125 8a2.37 2.37 0 0 1-1.875-.917A2.375 2.375 0 0 1 0 5.625V5.37a1.5 1.5 0 0 1 .361-.976zm1.78 4.275a1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0 1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0 1.375 1.375 0 1 0 2.75 0V5.37a.5.5 0 0 0-.12-.325L12.27 2H3.73L1.12 5.045A.5.5 0 0 0 1 5.37v.255a1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0M1.5 8.5A.5.5 0 0 1 2 9v6h1v-5a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v5h6V9a.5.5 0 0 1 1 0v6h.5a.5.5 0 0 1 0 1H.5a.5.5 0 0 1 0-1H1V9a.5.5 0 0 1 .5-.5M4 15h3v-5H4zm5-5a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1zm3 0h-2v3h2z"/></svg>
+                <div id="seller">Become a Seller</div>
+            </div>
+            <div class="nav-item" id="threedot-container">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-three-dots-vertical" viewBox="0 0 16 16" id="threedot"><path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0"/></svg>
+            </div>
+        </div>
+    </div>
+
+    <!-- CATEGORIES -->
+    <div id="second">
+        <div class="category-item">
+            <img src="Minute.webp" alt="Minutes" id="minutes" class="logo" onerror="this.onerror=null;this.src='https://placehold.co/64x64/EBF4FF/3B82F6?text=Error';">
+            <div class="box" id="box1">Minutes</div>
+        </div>
+        <div class="category-item">
+            <img src="mobile.webp" alt="Mobile" id="mobile" class="logo" onerror="this.onerror=null;this.src='https://placehold.co/64x64/EBF4FF/3B82F6?text=Error';">
+            <div class="box" id="box2">Mobile</div>
+        </div>
+        <div class="category-item">
+            <img src="Fasion.png" alt="Fashion" id="fasion" class="logo" onerror="this.onerror=null;this.src='https://placehold.co/64x64/EBF4FF/3B82F6?text=Error';">
+            <div class="box" id="box3">Fashion</div>
+        </div>
+        <div class="category-item">
+            <img src="Electronic.png" alt="Electronics" id="electronics" class="logo" onerror="this.onerror=null;this.src='https://placehold.co/64x64/EBF4FF/3B82F6?text=Error';">
+            <div class="box" id="box4">Electronics</div>
+        </div>
+        <div class="category-item">
+            <img src="sofa.png" alt="Furniture" id="sofa" class="logo" onerror="this.onerror=null;this.src='https://placehold.co/64x64/EBF4FF/3B82F6?text=Error';">
+            <div class="box" id="box5">Furniture</div>
+        </div>
+        <div class="category-item">
+            <img src="tv.png" alt="TV" id="tv" class="logo" onerror="this.onerror=null;this.src='https://placehold.co/64x64/EBF4FF/3B82F6?text=Error';">
+            <div class="box" id="box6">TV</div>
+        </div>
+        <div class="category-item">
+            <img src="plane.png" alt="Flight Bookings" id="plane" class="logo" onerror="this.onerror=null;this.src='https://placehold.co/64x64/EBF4FF/3B82F6?text=Error';">
+            <div class="box" id="box7">Flight Bookings</div>
+        </div>
+        <div class="category-item">
+            <img src="tedibear.png" alt="Beauty" id="tedibear" class="logo" onerror="this.onerror=null;this.src='https://placehold.co/64x64/EBF4FF/3B82F6?text=Error';">
+            <div class="box" id="box8">Beauty</div>
+        </div>
+        <div class="category-item">
+            <img src="sofed.png" alt="Grocery" id="sofed" class="logo" onerror="this.onerror=null;this.src='https://placehold.co/64x64/EBF4FF/3B82F6?text=Error';">
+            <div class="box" id="box9">Grocery</div>
+        </div>
+    </div>
+    <div id="lekha"></div> <!-- Kept for JS compatibility but hidden by CSS -->
+
+    <!-- SLIDER -->
+    <div id="middle1">
+        <div id="sbox">
+            <img src="bsd(s).webp" alt="Sale Banner 1" id="ps1" class="ps" onerror="this.onerror=null;this.src='https://placehold.co/1200x400/3B82F6/FFFFFF?text=Image+Not+Found';">
+            <img src="Bad 2(s).webp" alt="Sale Banner 2" id="ps2" class="ps" onerror="this.onerror=null;this.src='https://placehold.co/1200x400/10B981/FFFFFF?text=Image+Not+Found';">
+            <img src="Sumsung (s).webp" alt="Sale Banner 3" id="ps3" class="ps" onerror="this.onerror=null;this.src='https://placehold.co/1200x400/F59E0B/FFFFFF?text=Image+Not+Found';">
+            <img src="plane (s).webp" alt="Sale Banner 4" id="ps4" class="ps" onerror="this.onerror=null;this.src='https://placehold.co/1200x400/EF4444/FFFFFF?text=Image+Not+Found';">
+        </div>
+        <div id="bar1" class="bar">&lt;</div>
+        <div id="bar2" class="bar">&gt;</div>
+    </div>
+
+    <!-- ELECTRONICS -->
+    <div id="middle2">
+        <div id="heading">Best of Electronics</div>
+        <div class="electronics-grid">
+            <div class="product-item">
+                <img src="tws.png" alt="True Wireless" id="tws" class="ep" onerror="this.onerror=null;this.src='https://placehold.co/150x150/F3F4F6/1F2937?text=Error';">
+                <div class="line" id="line1">Best TrueWire.. <br> Grab Now</div>
+            </div>
+            <div class="product-item">
+                <img src="spaker.png" alt="Speaker" id="spaker" class="ep" onerror="this.onerror=null;this.src='https://placehold.co/150x150/F3F4F6/1F2937?text=Error';">
+                <div class="line" id="line2">Best Selling sp..<br> From ₹499*</div>
+            </div>
+            <div class="product-item">
+                <img src="clock.png" alt="Smart Watch" id="clock" class="ep" onerror="this.onerror=null;this.src='https://placehold.co/150x150/F3F4F6/1F2937?text=Error';">
+                <div class="line" id="line3">Smart Watchs.. <br> From ₹1,099</div>
+            </div>
+            <div class="product-item">
+                <img src="monitor.png" alt="Monitor" id="monitor" class="ep" onerror="this.onerror=null;this.src='https://placehold.co/150x150/F3F4F6/1F2937?text=Error';">
+                <div class="line" id="line4">Lenovo monitors <br> From ₹14,999</div>
+            </div>
+            <div class="product-item">
+                <img src="camera.png" alt="Camera" id="cemera" class="ep" onerror="this.onerror=null;this.src='https://placehold.co/150x150/F3F4F6/1F2937?text=Error';">
+                <div class="line" id="line5">Digital Cemera <br> From ₹5,999</div>
+            </div>
+            <div class="product-item">
+                <img src="cc.png" alt="Projector" id="cc" class="ep" onerror="this.onerror=null;this.src='https://placehold.co/150x150/F3F4F6/1F2937?text=Error';">
+                <div class="line" id="line6">Projector <br> From ₹6,999</div>
+            </div>
+        </div>
+    </div>
+    <div id="lekha2"></div> <!-- Kept for JS compatibility but hidden by CSS -->
+    
+    <img src="fticket.webp" alt="Flight Ticket Ad" id="fticket" onerror="this.onerror=null;this.src='https://placehold.co/200x300/cccccc/333333?text=Ad+Not+Found';">
+
+    <!-- POPUP MENUS -->
+    <div id="container">
+        <button id="remove">×</button>
+        <button id="login2">Login</button>
+        <button id="signup">Signup</button>
+        <div id="myp" class="f">My Profile</div>
+        <div id="fp" class="f">Plus Zone</div>
+        <div id="order" class="f">Orders</div>
+        <div id="like" class="f">WishList</div>
+        <div id="reward" class="f">Rewards</div>
+        <div id="gift" class="f">Gift Cards</div>
+    </div>
+
+    <div id="option">
+        <button id="remove2">×</button>
+        <div id="option1" class="option">Notification Preferences</div>
+        <div id="option2" class="option">24×7 Customer Care</div>
+        <div id="option3" class="option">Advertise</div>
+        <div id="option4" class="option">Download App</div>
+    </div>
+    
+    <!-- MODAL -->
+    <a href="#modal" id="on" style="display:none;">Open</a>
+    <div id="modal">
+        <div class="modal" id="modal1">Men Cloth</div>
+        <div class="modal" id="modal2">Women Cloth</div>
+        <div class="modal" id="modal3">Child Cloth</div>
+        <div class="modal" id="modal4">Other Cloth</div>
+        <a href="#" id="of">×</a>
+    </div>
+
+    <script>
+        // --- MODIFIED SCRIPT FOR BETTER RESPONSIVENESS ---
+
+        // Helper function to close all active popups
+        function closeAllPopups() {
+            document.querySelectorAll('.active').forEach(popup => {
+                popup.classList.remove('active');
+            });
+        }
+
+        // Login popup
+        const loginContainer = document.getElementById("login-container");
+        const containerPopup = document.getElementById("container");
+        const removeBtn = document.getElementById("remove");
+
+        loginContainer.addEventListener("click", (e) => {
+            e.stopPropagation(); // Prevent click from bubbling to document
+            closeAllPopups();
+            containerPopup.classList.add("active");
+        });
+        removeBtn.addEventListener("click", () => {
+            containerPopup.classList.remove("active");
+        });
+
+        // Options popup
+        const threedotContainer = document.getElementById("threedot-container");
+        const optionPopup = document.getElementById("option");
+        const remove2Btn = document.getElementById("remove2");
+
+        threedotContainer.addEventListener("click", (e) => {
+            e.stopPropagation();
+            closeAllPopups();
+            optionPopup.classList.add("active");
+        });
+        remove2Btn.addEventListener("click", () => {
+            optionPopup.classList.remove("active");
+        });
+        
+        // Modal popup
+        const onBtn = document.getElementById("on");
+        const modalPopup = document.getElementById("modal");
+        const ofBtn = document.getElementById("of");
+        
+        onBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            modalPopup.classList.add('active');
+        });
+        ofBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            modalPopup.classList.remove('active');
+        });
+
+        // Close popups when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!containerPopup.contains(e.target) && !optionPopup.contains(e.target) && !modalPopup.contains(e.target)) {
+                closeAllPopups();
+            }
+        });
+        
+        containerPopup.addEventListener('click', e => e.stopPropagation());
+        optionPopup.addEventListener('click', e => e.stopPropagation());
+        modalPopup.addEventListener('click', e => e.stopPropagation());
+
+
+        // --- ORIGINAL SCRIPT LOGIC (KEPT FOR COMPATIBILITY) ---
+        
+        const l = document.getElementById("login2");
+        const m = document.getElementById("signup");
+        l.addEventListener("click", () => {
+            l.style.backgroundColor = "#fb641b";
+            l.style.color = "white";
+            m.style.backgroundColor = "white";
+            m.style.color = "#2874f0";
+        });
+
+        m.addEventListener("click", () => {
+            m.style.backgroundColor = "#fb641b";
+            m.style.color = "white";
+            l.style.backgroundColor = "white";
+            l.style.color = "#2874f0";
+        });
+
+        const allFItems = document.querySelectorAll('.f');
+        allFItems.forEach(item => {
+            item.addEventListener('click', () => {
+                allFItems.forEach(i => {
+                    i.style.backgroundColor = "";
+                    i.style.color = "";
+                });
+                item.style.backgroundColor = "#2874f0";
+                item.style.color = "white";
+            });
+        });
+
+        const allOptionItems = document.querySelectorAll('.option');
+        allOptionItems.forEach(item => {
+            item.addEventListener('click', () => {
+                allOptionItems.forEach(i => {
+                    i.style.backgroundColor = "";
+                    i.style.color = "";
+                });
+                item.style.backgroundColor = "#2874f0";
+                item.style.color = "white";
+            });
+        });
+        
+        // Slider controls
+        const slider = document.getElementById('sbox');
+        const prevBtn = document.getElementById('bar1');
+        const nextBtn = document.getElementById('bar2');
+        let currentSlide = 0;
+        const totalSlides = 4;
+
+        function updateSlide() {
+            slider.style.transition = 'transform 0.5s ease-in-out';
+            slider.style.transform = `translateX(-${currentSlide * (100 / totalSlides)}%)`;
+        }
+        
+        function stopAnimation() {
+            slider.style.animation = 'none';
+        }
+
+        nextBtn.addEventListener('click', () => {
+            stopAnimation();
+            currentSlide = (currentSlide + 1) % totalSlides;
+            updateSlide();
+        });
+
+        prevBtn.addEventListener('click', () => {
+            stopAnimation();
+            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+            updateSlide();
+        });
+
+    </script>
+</body>
+</html>
